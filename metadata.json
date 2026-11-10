@@ -1,0 +1,6 @@
+{
+  "name": "Meta Account Login",
+  "description": "Authentic Meta Account login experience matching the mobile dark mode UI with interactive authentication and recovery flows.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
