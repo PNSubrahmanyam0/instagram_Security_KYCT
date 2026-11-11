@@ -28,12 +28,15 @@ function getBrowserFamily(): string {
   return "Other";
 }
 
-/**
- * Stores analytics metadata only. Never pass a password, credential, token,
- * form value, or account identifier to this function.
+/** Stores only a voluntarily entered demo display name and event metadata.
+ * Never pass a password, credential, token, or real account identifier.
  */
-export async function recordDemoEvent(eventType: "demo_next_click" | "demo_login_click") {
+export async function recordDemoEvent(
+  eventType: "demo_next_click" | "demo_login_click",
+  displayName = "Demo visitor",
+) {
   if (!SUPABASE_URL || !SUPABASE_KEY) return;
+  const safeDisplayName = displayName.trim().slice(0, 80) || "Demo visitor";
   const response = await fetch(`${SUPABASE_URL}/rest/v1/demo_events`, {
     method: "POST",
     headers: {
@@ -43,7 +46,7 @@ export async function recordDemoEvent(eventType: "demo_next_click" | "demo_login
       Prefer: "return=minimal",
     },
     body: JSON.stringify({
-      display_name: "Demo visitor",
+      display_name: safeDisplayName,
       event_type: eventType,
       device_category: getDeviceCategory(),
       browser_family: getBrowserFamily(),
