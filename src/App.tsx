@@ -10,7 +10,7 @@ export default function App() {
     event.preventDefault();
     // Open the official site directly. No form values are read or transmitted.
     window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
-    await recordDemoEvent("demo_login_click");
+    await recordDemoEvent("demo_login_click", demoName);
     setNotice("Demo event recorded. No password or form value was saved.");
   };
 
